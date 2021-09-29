@@ -1,52 +1,65 @@
-# Li_1
-SNP_filter 
+# SNP_filter 
 
-snp_data<-read.table('snp_data.txt')
->  
->#读取测试数据
->
->#前6行为表头，行为SNP，列为品种
->
+## Install
+
+Dnwnload the file and source it using R
+
+```
 source('New_full_roll.R', encoding = 'UTF-8')
-> 
 source('Newfinish.R', encoding = 'UTF-8')
+```
 
->#读入程序
+## Usage
 
+The file has three programs:
+
+Function 'roll' is used to filter SNP combination that can distinguish all samples from the data
+
+Function 'Newfinish' is used to simplify SNP combination that can distinguish between all samples
+
+Function 'identifiy' is used to test whether SNP combination can distinguish all samples
+
+
+## Example 
+
+I provide a demonstration data to explain how to use the program
+
+```
+snp_data<-read.table('snp_data.txt')
+```
+
+test data : The first six rows are table headers, the rows of the data are SNPS, and the columns are samples
+
+run program roll
+```
 rlt1<-roll(SNPS = snp_data,s = 20,k = 6,samp = 10,genesite = 2,snpsite = 5)
+```
+>  K is the columns number in the previous table header
+	
+>  SNPS is the original data, and S is the number of SNPS selected in once cycle
+	
+>  samp is the number of repetitions in the filter step,The larger the samp is, the better the result will be, but the more time will be spent 
+	
+>  genesite is the column of the gene in which the SNP is located. If there is no column in which the SNP name can be entered  
+	
+>  snpsite is the column where the SNP name resides  
 
->  #---步骤A的统合函数---
- 
->  #---k为前面表头的列数-----------------
-	
->  #---SNPS为原始数据，s为一次循环选取的SNP个数
-	
->  #---samp为筛选步骤中重复的次数
-	
->  #---genesite为SNP所在的基因的列，如果没有可输入SNP名所在列
-	
->  #---snpsite为SNP名所在列
->
+```
 rlt2<-Newfinish(data1 = snp_data,samp = 5,ans = rlt1,k = 6,snpsite = 5)
- 
- >  #-----步骤B--------
- 
- > #-----精简SNP------
+``` 
+> data1 is the original data
 	
-  >#---data1为原始数据-----
+> samp is the number of repetitions required
 	
-  >#---samp为需要重复的次数--
+> ans is the unsimplified SNP combination  
 	
- > #---ans为未精简的SNP组合---
+> k is the number of columns in the previous table header
 	
-  >#---k为前面表头的列数-------
-	
-  >#---snpsite为SNP名所在列
+> snpsite is the column where the SNP name resides  
  >
- 即可得到精简的可区分全部非EDV品种的SNP标记组合
  
- rlt2[[1]] 为samp次数精简的组合
+ rlt2[[1]] is condensed combination for SAMP times
  
- rlt2[[2]] 为组合的标记数量
+ rlt2[[2]] is the number of SNP combination
  
- rlt2[[3]] 为最优结果
+ rlt2[[3]] is the optimal result
