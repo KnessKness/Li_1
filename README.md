@@ -43,9 +43,8 @@ test data : The first five columns are table headers, the rows of the data are S
 
 测试数据:前五列为表头，用于提供数据集的基本信息，数据集行为SNP标记，列为品种信息
 
-run program CRS_SNP
+### run program CRS_SNP   运行程序 CRS_SNP
 
-运行程序 CRS_SNP
 
 ```
 rlt1<-CRS_SNP(data_o = snp_data,s = 20,k = 5,rep = 10,genesite = 3,snpsite = 4)
@@ -70,6 +69,9 @@ rlt1<-CRS_SNP(data_o = snp_data,s = 20,k = 5,rep = 10,genesite = 3,snpsite = 4)
 >  
 > snpsite为SNP名称所在位置
 > 
+
+### run program simplify_SNP  运行程序 simplify_SNP
+
 ```
 rlt2<-simplify_SNP(data1 = snp_data,rep = 5,SNPs = rlt1,k = 5,snpsite = 4)
 ``` 
@@ -104,3 +106,30 @@ rlt2<-simplify_SNP(data1 = snp_data,rep = 5,SNPs = rlt1,k = 5,snpsite = 4)
  rlt2[[3]] is the optimal result
 
  rlt2[[3]] 是其中最好的结果
+ 
+ 
+ ### run program identify_variety   运行程序 identify_variety
+ 
+ Save the SNP marker combination and verify whether the SNP marker combination can distinguish all samples of the dataset
+ 
+ 保存SNP标记组合，并验证SNP标记组合是否能够区分数据集全部样本
+ 
+ ```
+ SNPs<-rlt2[[3]][[2]][[1]]
+identify_variety(data1 = snp_data,snps = SNPs,k = 5,snpsite = 4)
+```
+> data1 is the original data
+> 
+> data1 为原始数据集
+> 
+> k is the number of columns in the previous table header
+> 
+> k为前面表头的列数
+> 
+> SNPs is the SNP combination  
+> 
+> SNPs为SNP组合
+> 
+> snpsite is the column where the SNP name resides  
+> 
+ >snpsite为SNP名称所在位置
